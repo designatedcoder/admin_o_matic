@@ -1,12 +1,12 @@
 <template>
-    <div class="font-sans text-gray-900 antialiased">
-        <div class="pt-4 bg-gray-100">
-            <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
-                <div>
-                    <jet-authentication-card-logo />
-                </div>
+    <div class="row justify-content-center pt-4">
+        <div class="col-6">
+            <div>
+                <jet-authentication-card-logo />
+            </div>
 
-                <div v-html="terms" class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+            <div class="card shadow-sm">
+                <div v-html="terms" class="card-body">
                 </div>
             </div>
         </div>

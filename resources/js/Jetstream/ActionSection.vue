@@ -1,24 +1,28 @@
 <template>
-    <div class="md:grid md:grid-cols-3 md:gap-6">
-        <jet-section-title>
-            <template #title><slot name="title"></slot></template>
-            <template #description><slot name="description"></slot></template>
-        </jet-section-title>
-
-        <div class="mt-5 md:mt-0 md:col-span-2">
-            <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
-                <slot name="content"></slot>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-4">
+      <jet-section-title>
+        <template #title><slot name="title"></slot></template>
+        <template #description><slot name="description"></slot></template>
+      </jet-section-title>
     </div>
+
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <slot name="content"></slot>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    import JetSectionTitle from './SectionTitle'
+  import JetSectionTitle from './SectionTitle'
 
-    export default {
-        components: {
-            JetSectionTitle,
-        }
+  export default {
+    components: {
+      JetSectionTitle,
     }
+  }
 </script>
