@@ -1,5 +1,5 @@
 ## Admin-O-Matic Series on Youtube
 
-Laravel 8 admin panel using inertia, jetstrap, laravel-permissions, adminlte, bootstrap 4 and
+Admin panel built with Laravel 8, Jetstream, Inertia, AdminLTE, Spatie's Laravel-permissions, Jetstrap, and Bootstrap 4.
 
 [Introduction Episode](https://youtu.be/1L8B7pGOBdc)
