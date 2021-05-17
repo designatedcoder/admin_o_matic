@@ -1,10 +1,10 @@
 <template>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <inertia-lin :href="route('admin.dashboard.index')" class="brand-link">
+        <inertia-link :href="route('admin.dashboard.index')" class="brand-link">
             <img :src="'/storage/images/AdminLTELogo.png'" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Admin-O-Matic</span>
-        </inertia-lin>
+        </inertia-link>
 
         <!-- Sidebar -->
         <div class="sidebar">
