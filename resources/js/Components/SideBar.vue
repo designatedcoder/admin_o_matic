@@ -24,11 +24,10 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <inertia-link :href="route('admin.dashboard.index')" class="nav-link active">
+                        <inertia-link :href="route('admin.dashboard.index')" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
-                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </inertia-link>
                     </li>
