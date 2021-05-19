@@ -56,7 +56,7 @@
             init() {
                 let SELECTOR_LOADER = '.loader'
                 setTimeout(() => {
-                    let $loader = $(SELECT_LOADER)
+                    let $loader = $(SELECTOR_LOADER)
                     if($loader) {
                         $loader.css('height', 0)
                         setTimeout(() => {
