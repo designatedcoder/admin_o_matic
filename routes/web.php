@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admins\AdminDashboardController;
+use App\Http\Controllers\Admins\RoleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,4 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::prefix('roles')->name('roles.')->group(function() {
+        Route::get('/', [RoleController::class, 'index'])->name('index');
+    });
 });
