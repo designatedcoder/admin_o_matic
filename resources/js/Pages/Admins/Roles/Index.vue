@@ -1,3 +1,8 @@
+<style>
+    .multiselect__content-wrapper {
+        position: relative;
+    }
+</style>
 <template>
     <admin-layout>
         <section class="content">
@@ -62,11 +67,11 @@
                     </div>
                     <div class="modal-body overflow-hidden">
                         <div class="h4">
-                            <span>Preview: <span class="text-capitalize">form name</span>
+                            <span>Preview: <span class="text-capitalize">{{ form.name }}</span>
                             </span>
                         </div>
                         <div class="card card-primary">
-                            <form>
+                            <form @submit.prevent="createRole">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="role" class="h4">Role Name</label>
@@ -78,7 +83,16 @@
 
                                     <div class="form-group">
                                         <label for="permissions" class="h4">Permissions</label>
-                                        multi-select
+                                        <multiselect
+                                            v-model="form.permissions"
+                                            :options="permissionOptions"
+                                            :multiple="true"
+                                            :taggable="true"
+                                            placeholder="Choose permission(s)"
+                                            @addPermissions="addPermissions"
+                                            label="name"
+                                            track-by="id"
+                                        ></multiselect>
                                     </div>
                                     <div class="invalid-feedback" :class="{ 'd-block' : form.errors.permissions}">
                                         {{ form.errors.permissions }}
@@ -87,7 +101,7 @@
 
                                 <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-danger text-uppercase" style="letter-spacing: 0.1em;" @click="closeModal">Cancel</button>
-                                    <button type="submit" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;">text</button>
+                                    <button type="submit" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;">Create</button>
                                 </div>
                             </form>
                         </div>
@@ -102,7 +116,7 @@
 <script>
     import AdminLayout from '@/Layouts/AdminLayout'
     export default {
-        props: ['roles'],
+        props: ['roles', 'permissions'],
         components: {
             AdminLayout,
         },
@@ -113,14 +127,31 @@
                     name: '',
                     permissions: []
                 }),
+                permissionOptions: this.permissions,
             }
         },
         methods: {
+            addPermissions(newPermission) {
+                let permission = {
+                    name: newPermission,
+                }
+                this.permissionOptions.push(permission)
+                this.form.permissions.push(permission)
+            },
             openModal() {
                 $('#modal-lg').modal('show')
             },
             closeModal() {
                 $('#modal-lg').modal('hide')
+            },
+            createRole() {
+                this.form.post(this.route('admin.roles.store'), {
+                    preserveScroll: true,
+                    onSuccess:() => {
+                        this.form.reset()
+                        this.closeModal()
+                    }
+                })
             }
         }
     }

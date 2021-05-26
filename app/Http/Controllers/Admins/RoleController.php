@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,6 +18,7 @@ class RoleController extends Controller
     public function index() {
         return Inertia::render('Admins/Roles/Index', [
             'roles' => Role::with('permissions')->get(),
+            'permissions' => Permission::all(),
         ]);
     }
 
@@ -36,9 +38,19 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $this->validate($request, [
+            'name' => ['required', 'max:25', 'unique:roles'],
+            'permissions' => 'required'
+        ]);
+        $role = Role::create([
+            'name' => $request->name,
+            'guard_name' => 'web',
+        ]);
+        if ($request->has('permissions')) {
+            $role->givePermissionTo(collect($request->permissions)->pluck('id')->toArray());
+        }
+        return back();
     }
 
     /**
