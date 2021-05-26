@@ -5,6 +5,9 @@ import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
+// Import components...
+import Multiselect from '@suadelabs/vue3-multiselect'
+
 const el = document.getElementById('app');
 
 createApp({
@@ -16,6 +19,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .component('multiselect', Multiselect)
     .mount(el);
 
 InertiaProgress.init({ color: '#4B5563' });
