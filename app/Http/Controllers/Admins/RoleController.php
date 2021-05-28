@@ -82,9 +82,10 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
-    {
-        //
+    public function update(Request $request, Role $role) {
+        $role->syncPermissions(collect($request->permissions)->pluck('id')->toArray());
+        $role->update(['name' => $request->name]);
+        return back();
     }
 
     /**
@@ -93,8 +94,8 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
-    {
-        //
+    public function destroy(Role $role) {
+        $role->delete();
+        return back();
     }
 }
