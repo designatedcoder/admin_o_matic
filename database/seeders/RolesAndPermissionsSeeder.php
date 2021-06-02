@@ -41,6 +41,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $adminPermission1 = Permission::create(['name' => 'read: admin', 'description' => 'read admin']);
         $adminPermission2 = Permission::create(['name' => 'update: admin', 'description' => 'update admin']);
 
+        // Misc
+        $miscPermission = Permission::create(['name' => 'N/A', 'description' => 'N/A']);
+
         $superAdminRole = Role::create(['name' => 'super-admin']);
         $adminRole = Role::create(['name' => 'admin']);
         $moderatorRole = Role::create(['name' => 'moderator']);
@@ -92,6 +95,10 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $developerRole->syncPermissions([
             $adminPermission1,
+        ]);
+
+        $userRole->syncPermissions([
+            $miscPermission,
         ]);
 
         $superAdmin = User::create([
@@ -185,6 +192,8 @@ class RolesAndPermissionsSeeder extends Seeder
             $adminPermission1,
         ]);
 
-        $user->syncRoles($userRole);
+        $user->syncRoles($userRole)->syncPermissions([
+            $miscPermission,
+        ]);
     }
 }
