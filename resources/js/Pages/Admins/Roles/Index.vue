@@ -30,7 +30,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(role, index) in roles" :key="index">
+                                            <tr v-for="(role, index) in roles.data" :key="index">
                                                 <td>{{ role.name }}</td>
                                                 <td>
                                                     <div class="d-flex flex-column">
@@ -49,7 +49,7 @@
                                     </table>
                                 </div>
                                 <div class="card-footer clearfix">
-                                    pagination links
+                                    <pagination :links="roles.links"></pagination>
                                 </div>
                             </div>
                         </div>
@@ -117,10 +117,12 @@
 
 <script>
     import AdminLayout from '@/Layouts/AdminLayout'
+    import Pagination from '@/Components/Pagination'
     export default {
         props: ['roles', 'permissions'],
         components: {
             AdminLayout,
+            Pagination,
         },
         data() {
             return {
@@ -156,18 +158,20 @@
             editModal(role) {
                 this.editMode = true
                 $('#modal-lg').modal('show')
-                this.editedIndex = this.roles.indexOf(role)
+                this.editedIndex = this.roles.data.indexOf(role)
                 this.form.name = role.name
                 this.form.id = role.id
                 this.form.permissions = role.permissions
             },
             openModal() {
+                this.form.clearErrors()
                 this.editMode = false
                 this.form.reset()
                 this.editedIndex = -1
                 $('#modal-lg').modal('show')
             },
             closeModal() {
+                this.form.clearErrors()
                 this.editMode = false
                 this.form.reset()
                 $('#modal-lg').modal('hide')
