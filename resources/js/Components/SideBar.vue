@@ -49,7 +49,7 @@
                                 </inertia-link>
                             </li>
                             <li class="nav-item">
-                                <inertia-link href="#" class="nav-link">
+                                <inertia-link :href="route('admin.users.index')" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Users
