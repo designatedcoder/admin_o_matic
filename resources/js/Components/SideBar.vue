@@ -41,7 +41,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <inertia-link href="#" class="nav-link">
+                                <inertia-link :href="route('admin.admins.index')" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Admins
