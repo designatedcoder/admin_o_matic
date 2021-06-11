@@ -4,7 +4,7 @@
         <template #header>
             <h1 class="m-0">Dashboard</h1>
         </template>
-        
+
         <section class="content">
             <div class="container-fluid">
                 <!-- Info boxes -->
@@ -65,7 +65,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">New Members</span>
-                                <span class="info-box-number">2,000</span>
+                                <span class="info-box-number">{{ users }}</span>
                             </div>
                         <!-- /.info-box-content -->
                         </div>
@@ -800,6 +800,7 @@
 <script>
     import AdminLayout from '@/Layouts/AdminLayout'
     export default {
+        props: ['users'],
         components: {
             AdminLayout,
         },
