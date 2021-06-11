@@ -1,6 +1,6 @@
 <template>
     <div class="dark-mode">
-        <div class="wrapper">
+        <div class="wrapper" style="overflow: auto;">
 
         <!-- Preloader -->
         <!-- <div class="preloader flex-column justify-content-center align-items-center">
@@ -54,14 +54,14 @@
         },
         methods: {
             init() {
-                let SELECTOR_LOADER = '.loader'
+                let SELECTOR_LOADER = '.preloader'
                 setTimeout(() => {
                     let $loader = $(SELECTOR_LOADER)
                     if($loader) {
                         $loader.css('height', 0)
                         setTimeout(() => {
                             $loader.children().hide()
-                        }, 2000)
+                        }, 200)
                     }
                 }, 2000)
             }
