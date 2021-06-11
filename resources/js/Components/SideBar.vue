@@ -24,7 +24,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <inertia-link :href="route('admin.dashboard.index')" class="nav-link">
+                        <inertia-link :href="route('admin.dashboard.index')" class="nav-link" :class="route().current('admin.dashboard.*') ? 'active' : ' '">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -41,7 +41,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <inertia-link :href="route('admin.admins.index')" class="nav-link">
+                                <inertia-link :href="route('admin.admins.index')" class="nav-link" :class="route().current('admin.admins.*') ? 'active' : ' '">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Admins
@@ -49,7 +49,7 @@
                                 </inertia-link>
                             </li>
                             <li class="nav-item">
-                                <inertia-link :href="route('admin.users.index')" class="nav-link">
+                                <inertia-link :href="route('admin.users.index')" class="nav-link" :class="route().current('admin.users.*') ? 'active' : ' '">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Users
@@ -57,7 +57,7 @@
                                 </inertia-link>
                             </li>
                             <li class="nav-item">
-                                <inertia-link :href="route('admin.roles.index')" class="nav-link">
+                                <inertia-link :href="route('admin.roles.index')" class="nav-link" :class="route().current('admin.roles.*') ? 'active' : ' '">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Roles
@@ -65,7 +65,7 @@
                                 </inertia-link>
                             </li>
                             <li class="nav-item">
-                                <inertia-link :href="route('admin.permissions.index')" class="nav-link">
+                                <inertia-link :href="route('admin.permissions.index')" class="nav-link" :class="route().current('admin.permissions.*') ? 'active' : ' '">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Permissions
