@@ -1,8 +1,3 @@
-<style>
-    .multiselect__content-wrapper {
-        position: relative;
-    }
-</style>
 <template>
     <div>
         <admin-layout>

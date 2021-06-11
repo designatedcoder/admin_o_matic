@@ -1,8 +1,3 @@
-<style>
-    .multiselect__content-wrapper {
-        position: relative;
-    }
-</style>
 <template>
     <div>
         <admin-layout>
@@ -102,7 +97,7 @@
 
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-danger text-uppercase" style="letter-spacing: 0.1em;" @click="closeModal">Cancel</button>
-                                        <button type="submit" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;">{{ buttonTxt }}</button>
+                                        <button type="submit" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;" :disabled="!form.name || form.processing">{{ buttonTxt }}</button>
                                     </div>
                                 </form>
                             </div>
@@ -221,7 +216,6 @@
                                     'Role has been deleted.',
                                     'success'
                                 )
-
                             }
                         })
                     }

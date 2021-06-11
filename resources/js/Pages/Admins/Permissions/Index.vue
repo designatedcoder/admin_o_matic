@@ -87,7 +87,7 @@
 
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-danger text-uppercase" style="letter-spacing: 0.1em;" @click="closeModal">Cancel</button>
-                                        <button type="submit" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;">{{ buttonTxt }}</button>
+                                        <button type="submit" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;" :disabled="!form.name || !form.description || form.processing">{{ buttonTxt }}</button>
                                     </div>
                                 </form>
                             </div>
