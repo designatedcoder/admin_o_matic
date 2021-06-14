@@ -8,7 +8,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Permissions</h3>
-                                    <div class="card-tools">
+                                    <div class="card-tools" v-if="$page.props.auth.hasRole.superAdmin || $page.props.auth.hasRole.admin">
                                         <button type="button" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em;" @click="openModal">
                                             Create
                                         </button>
@@ -21,7 +21,7 @@
                                                 <th class="text-capitalize">Name</th>
                                                 <th class="text-capitalize">Description</th>
                                                 <th class="text-capitalize">Created</th>
-                                                <th class="text-capitalize text-right">Actions</th>
+                                                <th class="text-capitalize text-right" v-if="$page.props.auth.hasRole.superAdmin || $page.props.auth.hasRole.admin">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -29,7 +29,7 @@
                                                 <td>{{ permission.name }}</td>
                                                 <td>{{ permission.description }}</td>
                                                 <td>{{ permission.created_at }}</td>
-                                                <td class="text-right">
+                                                <td class="text-right" v-if="$page.props.auth.hasRole.superAdmin || $page.props.auth.hasRole.admin">
                                                     <button class="btn btn-success text-uppercase" style="letter-spacing: 0.1em;" @click="editModal(permission)">Edit</button>
                                                     <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;" @click="deletePermission(permission)">Delete</button>
                                                 </td>

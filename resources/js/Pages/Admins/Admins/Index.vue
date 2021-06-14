@@ -17,7 +17,7 @@
                                                 <th class="text-capitalize">Role</th>
                                                 <th class="text-capitalize">E-mail</th>
                                                 <th class="text-capitalize">Joined</th>
-                                                <th class="text-capitalize text-right">Actions</th>
+                                                <th class="text-capitalize text-right" v-if="$page.props.auth.hasRole.superAdmin || $page.props.auth.hasRole.admin">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -30,7 +30,7 @@
                                                 </td>
                                                 <td>{{ admin.email }}</td>
                                                 <td>{{ admin.created_at }}</td>
-                                                <td class="text-right">
+                                                <td class="text-right" v-if="$page.props.auth.hasRole.superAdmin || $page.props.auth.hasRole.admin">
                                                     <button class="btn btn-success text-uppercase" style="letter-spacing: 0.1em;" @click="editModal(admin)">Edit</button>
                                                 </td>
                                             </tr>
