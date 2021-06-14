@@ -10,6 +10,11 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware(['role:super-admin|admin|moderator|developer']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -73,17 +78,20 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user) {
-        if (!$request->roles) {
-            return back()->withErrors(['roles' => 'The role field is required']);
-        }
-        if ($request->roles['id'] != 5) {
-            $adminRole = Role::where('id', $request->roles['id'])->first();
-            $user->syncRoles($adminRole);
-            return back();
-        } else {
-            $userRole = Role::where('id', 5)->first();
-            $user->update(['is_admin' => 0]);
-            $user->syncRoles($userRole);
+        if (auth()->user()->hasAnyRole(['super-admin', 'admin'])) {
+            if (!$request->roles) {
+                return back()->withErrors(['roles' => 'The role field is required']);
+            }
+            if ($request->roles['id'] != 5) {
+                $adminRole = Role::where('id', $request->roles['id'])->first();
+                $user->syncRoles($adminRole);
+                return back();
+            } else {
+                $userRole = Role::where('id', 5)->first();
+                $user->update(['is_admin' => 0]);
+                $user->syncRoles($userRole);
+                return back();
+            }
             return back();
         }
         return back();

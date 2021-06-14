@@ -11,6 +11,10 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['role:super-admin|admin|moderator']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,18 +44,21 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->validate($request, [
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-        ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'is_admin' => 0,
-            'password' => Hash::make('password')
-        ]);
-        $role = Role::where('id', 5)->first();
-        $user->syncRoles($role);
+        if (auth()->user()->hasAnyRole(['super-admin', 'admin'])) {
+            $this->validate($request, [
+                'name' => ['required', 'max:50'],
+                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'is_admin' => 0,
+                'password' => Hash::make('password')
+            ]);
+            $role = Role::where('id', 5)->first();
+            $user->syncRoles($role);
+            return back();
+        }
         return back();
     }
 
@@ -85,21 +92,24 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user) {
-        $this->validate($request, [
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50'],
-        ]);
-        if ($request->roles[0] === null) {
-            return back()->withErrors(['roles' => 'The role field is required']);
-        }
-        if ($request->roles[0]['id'] != 5) {
-            $adminRole = Role::where('id', $request->roles[0]['id'])->first();
-            $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'is_admin' => 1,
+        if (auth()->user()->hasAnyRole(['super-admin', 'admin'])) {
+            $this->validate($request, [
+                'name' => ['required', 'max:50'],
+                'email' => ['required', 'string', 'email', 'max:50'],
             ]);
-            $user->syncRoles($adminRole);
+            if ($request->roles[0] === null) {
+                return back()->withErrors(['roles' => 'The role field is required']);
+            }
+            if ($request->roles[0]['id'] != 5) {
+                $adminRole = Role::where('id', $request->roles[0]['id'])->first();
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'is_admin' => 1,
+                ]);
+                $user->syncRoles($adminRole);
+                return back();
+            }
             return back();
         }
         return back();
@@ -112,7 +122,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user) {
-        $user->delete();
+        if (auth()->user()->hasAnyRole(['super-admin', 'admin'])) {
+            $user->delete();
+            return back();
+        }
         return back();
     }
 }
