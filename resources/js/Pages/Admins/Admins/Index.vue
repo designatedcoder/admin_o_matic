@@ -122,7 +122,6 @@
                 this.form.roles.push(tag)
             },
             editModal(admin) {
-                this.editMode = true
                 $('#modal-lg').modal('show')
                 this.editedIndex = this.admins.indexOf(admin)
                 this.form.name = admin.name
@@ -131,9 +130,6 @@
                 this.form.roles = admin.roles
             },
             openModal() {
-                this.form.clearErrors()
-                this.editMode = false
-                this.form.reset()
                 this.editedIndex = -1
                 $('#modal-lg').modal('show')
             },
@@ -151,7 +147,6 @@
                             icon: 'success',
                             title: 'Admin has been updated!'
                         })
-                        this.form.reset()
                         this.closeModal()
                     }
                 })

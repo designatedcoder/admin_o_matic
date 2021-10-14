@@ -139,7 +139,7 @@
                 return this.editedIndex === -1 ? 'Create' : 'Edit';
             },
             checkMode() {
-                return this.editMode === false ? this.createRole() : this.editRole();
+                return this.editMode === false ? this.createRole : this.editRole;
             }
         },
         methods: {
@@ -159,9 +159,6 @@
                 this.form.permissions = role.permissions
             },
             openModal() {
-                this.form.clearErrors()
-                this.editMode = false
-                this.form.reset()
                 this.editedIndex = -1
                 $('#modal-lg').modal('show')
             },
@@ -175,7 +172,6 @@
                 this.form.post(this.route('admin.roles.store'), {
                     preserveScroll: true,
                     onSuccess:() => {
-                        this.form.reset()
                         this.closeModal()
                         Toast.fire({
                             icon: 'success',
@@ -192,7 +188,6 @@
                             icon: 'success',
                             title: 'Role has been updated!'
                         })
-                        this.form.reset()
                         this.closeModal()
                     }
                 })

@@ -26,7 +26,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="(user, index) in users.data" :key="index">
-                                                <td>{{ user.name }}</td>
+                                                <td class="text-capitalize">{{ user.name }}</td>
                                                 <td>{{ user.email }}</td>
                                                 <td>{{ user.created_at }}</td>
                                                 <td class="text-right" v-if="$page.props.auth.hasRole.superAdmin || $page.props.auth.hasRole.admin">
@@ -63,7 +63,7 @@
                                 </span>
                             </div>
                             <div class="card card-primary">
-                                <form @submit.prevent="editMode ? editUser() : createUser()">
+                                <form @submit.prevent="checkMode">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="name" class="h4">Name</label>
@@ -143,6 +143,9 @@
             buttonTxt() {
                 return this.editedIndex === -1 ? 'Create' : 'Edit';
             },
+            checkMode() {
+                return this.editMode === false ? this.createUser : this.editUser
+            }
         },
         methods: {
             addTag(newRole) {
@@ -162,9 +165,6 @@
                 this.form.roles = user.roles
             },
             openModal() {
-                this.form.clearErrors()
-                this.editMode = false
-                this.form.reset()
                 this.editedIndex = -1
                 $('#modal-lg').modal('show')
             },
@@ -178,7 +178,6 @@
                 this.form.post(this.route('admin.users.store'), {
                     preserveScroll: true,
                     onSuccess:() => {
-                        this.form.reset()
                         this.closeModal()
                         Toast.fire({
                             icon: 'success',
@@ -195,7 +194,6 @@
                             icon: 'success',
                             title: 'User has been updated!'
                         })
-                        this.form.reset()
                         this.closeModal()
                     }
                 })

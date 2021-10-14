@@ -128,7 +128,7 @@
                 return this.editedIndex === -1 ? 'Create' : 'Edit';
             },
             checkMode() {
-                return this.editMode === false ? this.createPermission() : this.editPermission();
+                return this.editMode === false ? this.createPermission : this.editPermission;
             }
         },
         methods: {
@@ -141,9 +141,6 @@
                 this.form.description = permission.description
             },
             openModal() {
-                this.form.clearErrors()
-                this.editMode = false
-                this.form.reset()
                 this.editedIndex = -1
                 $('#modal-lg').modal('show')
             },
@@ -157,7 +154,6 @@
                 this.form.post(this.route('admin.permissions.store'), {
                     preserveScroll: true,
                     onSuccess:() => {
-                        this.form.reset()
                         this.closeModal()
                         Toast.fire({
                             icon: 'success',
@@ -174,7 +170,6 @@
                             icon: 'success',
                             title: 'Permission has been updated!'
                         })
-                        this.form.reset()
                         this.closeModal()
                     }
                 })
