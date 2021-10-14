@@ -109,6 +109,11 @@ class UserController extends Controller
                 ]);
                 $user->syncRoles($adminRole);
                 return back();
+            } else {
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
             }
             return back();
         }
