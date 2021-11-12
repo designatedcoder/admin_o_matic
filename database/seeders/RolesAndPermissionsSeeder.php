@@ -146,54 +146,14 @@ class RolesAndPermissionsSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $superAdmin->syncRoles([$superAdminRole])->syncPermissions([
-            $userPermission1,
-            $userPermission2,
-            $userPermission3,
-            $userPermission4,
-            $rolePermission1,
-            $rolePermission2,
-            $rolePermission3,
-            $rolePermission4,
-            $permission1,
-            $permission2,
-            $permission3,
-            $permission4,
-            $adminPermission1,
-            $adminPermission2,
-            $userPermission1,
-        ]);
+        $superAdmin->syncRoles([$superAdminRole]);
 
-        $admin->syncRoles([$adminRole])->syncPermissions([
-            $userPermission1,
-            $userPermission2,
-            $userPermission3,
-            $userPermission4,
-            $rolePermission1,
-            $rolePermission2,
-            $rolePermission3,
-            $rolePermission4,
-            $permission1,
-            $permission2,
-            $permission3,
-            $permission4,
-            $adminPermission1,
-            $adminPermission2,
-            $userPermission1,
-        ]);
+        $admin->syncRoles([$adminRole]);
 
-        $moderator->syncRoles($moderatorRole)->syncPermissions([
-            $userPermission2,
-            $rolePermission2,
-            $adminPermission1,
-        ]);
+        $moderator->syncRoles($moderatorRole);
 
-        $developer->syncRoles($developerRole)->syncPermissions([
-            $adminPermission1,
-        ]);
+        $developer->syncRoles($developerRole);
 
-        $user->syncRoles($userRole)->syncPermissions([
-            $miscPermission,
-        ]);
+        $user->syncRoles($userRole);
     }
 }
