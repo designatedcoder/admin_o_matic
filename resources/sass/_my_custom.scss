@@ -1,0 +1,19 @@
+.multiselect__content-wrapper {
+    position: relative;
+}
+
+.nav-button {
+  display: flex;
+  color: rgb(206, 212, 218);
+  background-color: transparent;
+  width: 100%;
+  transition: width 0.3s ease-in-out 0s;
+  align-items: center;
+  border:none;
+  padding: 0.5rem 1rem;
+}
+
+.nav-button:hover{
+  border-radius: 0.25rem;
+  background-color: #494e53;
+}
