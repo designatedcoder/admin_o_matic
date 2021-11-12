@@ -84,12 +84,12 @@
                         </inertia-link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" role="button">
-                            <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>
-                                Logout
-                            </p>
-                        </a>
+                        <form @submit.prevent="logout">
+                            <button type="submit" class="nav-button">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -99,5 +99,11 @@
     </aside>
 </template>
 <script>
-    export default {}
+    export default {
+        methods: {
+            logout() {
+                this.$inertia.post(route('logout'));
+            },
+        }
+    }
 </script>
